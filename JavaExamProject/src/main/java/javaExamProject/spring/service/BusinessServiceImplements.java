@@ -3,14 +3,13 @@ package javaExamProject.spring.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import javaExamProject.spring.model.Business;
 
 @Service("BusinessService")
-public class BusinessServiceImplements implements BusinessService{
+public class BusinessServiceImplements implements BusinessService {
 	private static ArrayList<Business> business;
+
 
 	public ArrayList<Business> getBusiness() {
 		return business;
@@ -40,19 +39,19 @@ public class BusinessServiceImplements implements BusinessService{
 		}
 		return store;
 	}
-	
+
 	public ArrayList<Business> findBusinessByMunicipality(String value) {
 		ArrayList<Business> store = new ArrayList<Business>();
 		for(int i = 0; i < business.size(); i++ ) {
 			if (Integer.toString(business.get(i).getMunicipality()).equals(value)) {
-			
+
 				store.addAll(business);
 			}
 		}
 		return store;
 	}
-	
-	
+
+
 	public String countBusiness(String variable, String value) {
 		String message = "";
 		int n= 0;
@@ -67,12 +66,12 @@ public class BusinessServiceImplements implements BusinessService{
 			}
 			break;
 
-		case "expertise":
+		case "address":
 			n = 0;
 			for(Business b : business) {
-				if (b.getExpertise().equals(value)) {
+				if (b.getAddress().equals(value)) {
 					n++;
-					message = "Il numero di business con area di competenza pari a " + value + " e' " + n;
+					message = "Il numero di business con via pari a " + value + " e' " + n;
 				}
 			}
 			break;
@@ -99,7 +98,7 @@ public class BusinessServiceImplements implements BusinessService{
 		return message;
 	}
 
-	
+
 	private int count(String variable, String value) {
 		int n= 0;
 		switch(variable) {
@@ -112,10 +111,10 @@ public class BusinessServiceImplements implements BusinessService{
 			}
 			break;
 
-		case "expertise":
+		case "address":
 			n = 0;
 			for(Business b : business) {
-				if (b.getExpertise().equals(value)) {
+				if (b.getAddress().equals(value)) {
 					n++;
 				}
 			}
@@ -153,10 +152,10 @@ public class BusinessServiceImplements implements BusinessService{
 			message = "La media dei business con valore di municipio pari a: " + value + " e': " + t;
 			break;
 
-		case "expertise": 
-			count = this.count("expertise", value);
+		case "address": 
+			count = this.count("address", value);
 			t=(double)count/(double)business.size();
-			message = "La media dei business con valore di area di competenza pari a: " + value + " e': " + t;
+			message = "La media dei business con via pari a: " + value + " e': " + t;
 			break;
 
 		case "pHistoricalSector":
@@ -190,12 +189,12 @@ public class BusinessServiceImplements implements BusinessService{
 				}
 			}
 			break;
-		case "expertise": 
+		case "address": 
 			for(Business b : business) {
-				count = this.count("expertise", (b.getExpertise()));
+				count = this.count("address", (b.getAddress()));
 				if(count > max) {
 					max = count;
-					message = "L'area di competenza con più business: " + b.getExpertise() + " e il numero di business e': " + max;
+					message = "La via con più business: " + b.getAddress() + " e il numero di business e': " + max;
 				}
 			}
 			break;
@@ -236,12 +235,12 @@ public class BusinessServiceImplements implements BusinessService{
 				}
 			}
 			break;
-		case "expertise": 
+		case "address": 
 			for(Business b : business) {
-				count = this.count("expertise", (b.getExpertise()));
+				count = this.count("address", (b.getAddress()));
 				if(count < min) {
 					min = count;
-					message = "L'area di competenza con minor numero di business: " + b.getExpertise() + " e il numero di business e': " + min;
+					message = "La viaa con minor numero di business: " + b.getAddress() + " e il numero di business e': " + min;
 				}
 			}
 			break;
@@ -267,31 +266,30 @@ public class BusinessServiceImplements implements BusinessService{
 		}
 		return message;
 	}
-	
+
 	public int sumBusiness(String variable, String value) {
 		int n = 0;
-		
+
 		for(Business b : business)
-		switch (variable) {
-		case "municipality": 
-			if(Integer.toString(b.getMunicipality()).equals(value))
-			n += b.getTotalArea();
-			
-		case "pHistoricalSector": 
-			if(b.getpHistoricalSector().equals(value))
-			n++;
-			
-		}
-		
-		return n;
-	}
-	
-	public double devStdBusiness() {
-		double n = 0;
-		
+			switch (variable) {
+			case "municipality": 
+				if(Integer.toString(b.getMunicipality()).equals(value))
+					n += b.getTotalArea();
+
+			case "pHistoricalSector": 
+				if(b.getpHistoricalSector().equals(value))
+					n++;
+
+			}
+
 		return n;
 	}
 
+	public double devStdBusiness() {
+		double n = 0;
+
+		return n;
+	}
 
 	private static ArrayList<Business> insertion() throws IOException {
 
@@ -309,7 +307,7 @@ public class BusinessServiceImplements implements BusinessService{
 		ParserCSV.parserCSV(records);
 		ArrayList<Business> business = ParserCSV.getBusiness();
 
-		System.out.println("Business OK : "+business.size());
+		System.out.println("Rows accepted : " + business.size());
 		for(int i = 0; i < business.size(); i++) {
 			businessB.add(new Business(business.get(i)));
 		} 
@@ -317,9 +315,109 @@ public class BusinessServiceImplements implements BusinessService{
 		return businessB;
 	}
 
+	public Object cFilter(String operator,int...totalArea) {
 
+		List<Business> bus = new ArrayList<Business>();
+
+
+		switch(operator) {
+		case ">": {
+			for (Business b: business)
+			{
+				if(b.getTotalArea()>totalArea[0])
+				{
+					bus.add(b);
+				}
+
+			}
+		}
+
+		case ">=": {
+			for (Business b: business)
+			{
+				if(b.getTotalArea()>=totalArea[0])
+				{
+					bus.add(b);
+				}
+
+			}
+		}
+
+		case "<": {
+			for (Business b: business)
+			{
+				if(b.getTotalArea()<totalArea[0])
+				{
+					bus.add(b);
+				}
+
+			}
+		}
+
+		case "<=": {
+			for (Business b: business)
+			{
+				if(b.getTotalArea()<=totalArea[0])
+				{
+					bus.add(b);
+				}
+
+			}
+		}
+
+		case "==": {
+			for (Business b: business)
+			{
+				if(b.getTotalArea()==totalArea[0])
+				{
+					bus.add(b);
+				}
+
+			}
+		}
+
+		case "=><=": {
+			String message ="";
+			{
+				if(totalArea.length!=2) {
+					message="You have to insert two areas!";
+					return message;}
+				if(totalArea[0] > totalArea[1]) {
+					message="The first parameter must be less than or equal to the second";
+					return message;}
+				else 
+				{
+					for (Business b: business) {
+						if(b.getTotalArea()<=totalArea[1] && b.getTotalArea()>=totalArea[0])
+						{
+							bus.add(b);
+						}
+						}
+					
+					}
+				}
+
+			}
+		}
+
+
+		
+		return bus;
+
+	}
 	
-
+	public Object addressFilter(String address) {
+		
+		List<Business> bus = new ArrayList<Business>();
+		
+		for(Business b: business) {
+			if (b.getAddress().equals(address)) {
+			return bus.add(b);
+			}
+		}
+		return bus;
+		
+	}
 
 }
 

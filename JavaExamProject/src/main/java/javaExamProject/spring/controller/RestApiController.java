@@ -3,8 +3,6 @@ package javaExamProject.spring.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.ws.Response;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javaExamProject.spring.model.Business;
 import javaExamProject.spring.service.BusinessService;
+import javaExamProject.spring.service.BusinessServiceImplements;
 import javaExamProject.spring.util.Error;
 
 @RestController
@@ -117,5 +117,24 @@ public class RestApiController {
 		}
 		return new ResponseEntity<Integer>(response, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/business/cFilter", method = RequestMethod.GET)
+	public Object cFilter(@RequestParam("totalArea") int totalArea, @RequestParam("operator") String operator) {
+		BusinessServiceImplements b = new BusinessServiceImplements();
+		return b.cFilter(operator, totalArea);
+	}
+	
+	
+	@RequestMapping(value = "/business/addressFilter", method = RequestMethod.GET)
+	public ResponseEntity<?> addressFilter(@RequestParam("address") String address) {
+		logger.info("Fetching Business with address {}", address);
+		ArrayList<Business> business = BusinessService.findBusinessByMunicipality(address);
+		if (business == null) {
+			logger.error("Business with address {} not found.", address);
+			return new ResponseEntity(new Error("Business with address " + address + " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<ArrayList<Business>>(business, HttpStatus.OK);
+	}
+	
 	
 }
