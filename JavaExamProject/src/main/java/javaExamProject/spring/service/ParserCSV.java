@@ -78,7 +78,7 @@ public class ParserCSV {
 						line.get(0).trim().replace("/", "-").isEmpty() ? "codeNotFound" : line.get(0).trim().replace("/", "-"),
 					    line.get(1).trim().replace("|","-").replace(" ", "").isEmpty() ? "siteNotFound": line.get(1).trim().replace("|","-").replace(" ", ""),
 					    line.get(2).trim().replace(" ", "").isEmpty()? "expertiseNotFound": line.get(2).trim().replace(" ", ""),
-					    line.get(3).trim().isEmpty()? "addressNotFound" : line.get(3).trim(),
+					    line.get(3).trim().replace(" ", "").isEmpty()? "addressNotFound" : line.get(3).trim().replace(" ", ""),
 					    line.get(4).trim().isEmpty()? "civicNotFound" : line.get(4).trim(),
 					    line.get(5).trim().isEmpty()? "addresscCodeNotFound" : line.get(5).trim(),
 					    line.get(6).trim().replace(" ", "").isEmpty()? "signboardNotFound" : line.get(6).trim().replace(" ", ""),

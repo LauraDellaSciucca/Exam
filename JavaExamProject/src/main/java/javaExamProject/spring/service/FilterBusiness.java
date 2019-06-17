@@ -1,10 +1,14 @@
 package javaExamProject.spring.service;
 
-public interface FilterBusiness<E,T> {
+public interface FilterBusiness{
 	
-	public Object cFilter(String operator,int values);
+	 Object cFilter(String operator,int ...totalArea);
 	
-	public Object addressFilter(String address);	
+	 Object addressFilter(String address);
+	
+	 Object distanceFilter(double range, double latitude, double longitude);
+	 
+	 Object lFilter(String attribute,String operator, String value[]); //mancano 
 	
 
 }
