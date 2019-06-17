@@ -18,7 +18,7 @@ import javaExamProject.spring.model.Business;
 import javaExamProject.spring.model.Metadata;
 import javaExamProject.spring.service.BusinessService;
 import javaExamProject.spring.service.BusinessServiceImplements;
-import javaExamProject.spring.service.FilterBusiness;
+
 import javaExamProject.spring.util.Error;
 
 @RestController
@@ -124,7 +124,7 @@ public class RestApiController {
 
 	@RequestMapping(value = "/business/devStdB", method = RequestMethod.GET)
 	public ResponseEntity<?> DevStdBusiness() {
-       String response = BusinessService.devStdBusiness();
+		String response = BusinessService.devStdBusiness();
 		if (response.isEmpty()) {
 			logger.error("Error request, DevStd not found.");
 			return new ResponseEntity(new Error("Error request, DevStd not found"), HttpStatus.NOT_FOUND);
@@ -132,47 +132,81 @@ public class RestApiController {
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(value = "/business/cFilter", method = RequestMethod.GET)
-	public Object cFilter(@RequestParam("totalArea") int[] totalArea, @RequestParam("operator") String operator) {
-		 logger.info("Filtering Business with totalArea {} and operator{}, ", totalArea, operator);
-		BusinessServiceImplements b = new BusinessServiceImplements();
-		if(b.cFilter(operator,totalArea) == null) {
-			 logger.error("Error request, business not found.");
-			 return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
+	public ResponseEntity<?> cFilter(@RequestParam("totalArea") int[] totalArea, @RequestParam("operator") String operator) {
+		logger.info("Filtering Business with totalArea {} and operator{}, ", totalArea, operator);
+		ArrayList<Business> business = BusinessService.cFilter(operator,totalArea);
+		if(business == null) {
+			logger.error("Error request, business not found.");
+			return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
 		}
-	       Object response = b.cFilter(operator,totalArea);
-	       return new ResponseEntity<Object>(response, HttpStatus.OK);
+		ArrayList<Business> response = business;
+		return new ResponseEntity<ArrayList<Business>>(response, HttpStatus.OK);
 	}
 
 
 	@RequestMapping(value = "/business/addressFilter", method = RequestMethod.GET)
-	public Object addressFilter(@RequestParam("address") String address) {
-  logger.info("Filtering Business with address {} , ", address);
-       BusinessServiceImplements b = new BusinessServiceImplements();
-       if(b.addressFilter(address)==null) {
-    	   logger.error("Error request, business not found.");
-    	   return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
-    	   
-       }
-       Object response = b.addressFilter(address);
-       return new ResponseEntity<Object>(response, HttpStatus.OK);
+	public ResponseEntity<?> addressFilter(@RequestParam("address") String address) {
+		logger.info("Filtering Business with address {} , ", address);
+		ArrayList<Business> business = BusinessService.addressFilter(address);
+		if(business ==null) {
+			logger.error("Error request, business not found.");
+			return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
+
+		}
+		ArrayList<Business> response = business;
+		return new ResponseEntity<ArrayList<Business>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/business/dFilter", method = RequestMethod.GET)
-	public Object distanceFilter(@RequestParam("range") double range,@RequestParam("latitude") double latitude,@RequestParam("longitude") double longitude) {
+	public ResponseEntity<?>  distanceFilter(@RequestParam("range") double range,@RequestParam("latitude") double latitude,@RequestParam("longitude") double longitude) {
 		logger.info("Filtering Business with range {} ,latitude {} and longitude {} ", range,latitude,longitude);
-        BusinessServiceImplements b = new BusinessServiceImplements();
-        if(b.distanceFilter(range,latitude,longitude) == null) {
-        	logger.error("Error request, business not found.");
+		ArrayList<Business> business = BusinessService.distanceFilter(range,latitude,longitude);
+		if(business == null) {
+			logger.error("Error request, business not found.");
 			return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
-        }
-        Object response = b.distanceFilter(range,latitude,longitude);
-        return new ResponseEntity<Object>(response, HttpStatus.OK);
+		}
+		ArrayList<Business> response = business;
+		return new ResponseEntity<ArrayList<Business>>(response, HttpStatus.OK);
 	}
-	
 
-	
+	@RequestMapping(value = "/business/filterN", method = RequestMethod.GET)
+	public ResponseEntity<?> filterN(@RequestParam("field") String field,@RequestParam("operator") String operator,@RequestParam("values") String values) {
+		logger.info("Filtering Business with field {} ,operator {} and valuese {} ",field,operator,values);
+		ArrayList<Business> business = BusinessService.filterN( field,  operator,  values);
+		if(business == null) {
+			logger.error("Error request, business not found.");
+			return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
+		}
+		ArrayList<Business> response = business;
+		return new ResponseEntity<ArrayList<Business>>(response, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/business/filterNot", method = RequestMethod.GET)
+	public ResponseEntity<?> filterNot(@RequestParam("field") String field,@RequestParam("operator") String operator,@RequestParam("values") String values) {
+		logger.info("Filtering Business with field {} ,operator {} and value {} ",field,operator,values);
+		ArrayList<Business> business = BusinessService.filterN( field,  operator,  values);
+		if(business == null) {
+			logger.error("Error request, business not found.");
+			return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
+		}
+		ArrayList<Business> response = business;
+		return new ResponseEntity<ArrayList<Business>>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/business/lFilter", method = RequestMethod.GET)
+	public ResponseEntity<?> lFilter(@RequestParam("variable") String variable, @RequestParam("operator") String operator, @RequestParam("value") String value) {
+		ArrayList<Business> business = BusinessService.lFilter(variable,operator,value);
+		logger.info("Filtering Business with {} {} {} ", variable, operator,value);
+
+		if(business == null) {
+			logger.error("Error request, business not found.");
+			return new ResponseEntity(new Error("Error request, Business not found"), HttpStatus.NOT_FOUND);
+		}
+		ArrayList<Business> response = business;
+		return new ResponseEntity<ArrayList<Business>>(response,HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/business/metadata", method = RequestMethod.GET)
 	public ResponseEntity<List<Metadata>> catalogueAll() {
 		List<Metadata> metadata = BusinessService.getMetadata();
@@ -182,10 +216,5 @@ public class RestApiController {
 		}
 		return new ResponseEntity<List<Metadata>>(metadata, HttpStatus.OK);
 	}
-
-	
-	
-
-
 
 }

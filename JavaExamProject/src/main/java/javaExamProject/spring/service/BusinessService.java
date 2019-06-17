@@ -29,8 +29,17 @@ public interface BusinessService {
 	ArrayList<Business> findBusinessByMunicipality(String value);
 
 	String devStdBusiness();
-
 	
+	ArrayList<Business> filterN(String field, String operator, String values);
+	
+	ArrayList<Business> filterNot(String field, String operator, String values);
+	
+	ArrayList<Business> cFilter(String operator,int ...totalArea);
+	ArrayList<Business> addressFilter(String address);
+	
+	ArrayList<Business> distanceFilter(double range, double latitude, double longitude);
+	
+	ArrayList<Business> lFilter(String var, String operator, String  value);
 	
 
 }
