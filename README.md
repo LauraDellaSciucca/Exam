@@ -31,10 +31,10 @@ Il progetto è strutturato in 5 package:
 - **javaExamProject.spring.controller:** caratterizzato dalla classe che rappresenta il componente con il quale interagisce direttamente l'utente. 
 - **javaExamProject.spring.model:** costituito dalla classe `Business.java` e `Metadata.java` che permette di visualizzare i metadati relativi agli attributi del dataset.
 - **javaExamProject.spring.service:** costituita da 4 classi
- - `BusinessService.java:` interfaccia
- - `BusinessServiceImplements.java:` classe che implementa l'interfaccia
- - `ParserJSON.java:` in cui si effettua il parser del file JSON con il quale si trova il file in formato CSV e si effettua il relativo downolad
- - `ParserCSV.java:` classe utilizzata per effettuare il parser del file in formato CSV
+  - `BusinessService.java:` interfaccia
+  - `BusinessServiceImplements.java:` classe che implementa l'interfaccia
+  - `ParserJSON.java:` in cui si effettua il parser del file JSON con il quale si trova il file in formato CSV e si effettua il relativo downolad
+  - `ParserCSV.java:` classe utilizzata per effettuare il parser del file in formato CSV
 
 - **javaExamProject.spring.util:** che contiene una classe utilizzata per la gestione degli errori.
 
@@ -48,9 +48,9 @@ Nell'applicazione sono inotre presenti diversi file:
  
 
 
-![diagrammaUML](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png)
+![diagrammaUML](https://github.com/LauraDellaSciucca/Exam/blob/master/UML.png)
 
-[link UML](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png)
+[link UML](https://github.com/LauraDellaSciucca/Exam/blob/master/UML.png)
 
 
 
