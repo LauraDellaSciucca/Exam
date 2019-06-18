@@ -9,6 +9,13 @@ import java.util.Scanner;
 
 import javaExamProject.spring.model.Business;
 
+/**
+ * classe che permette di effettuare il parser CSV,con le informazioni recuperate verra' generato un ArrayList contenete ArrayList delle signole attivita'.
+ * @author Angela D'Antonio
+ * @author Laura Della Sciucca
+ */
+
+
 public class ParserCSV {
 	final static String COMMA_DELIMITER = ";";
 	private static ArrayList <Business> business;
@@ -20,7 +27,15 @@ public class ParserCSV {
 	public static void setBusiness(ArrayList<Business> business) {
 		ParserCSV.business = business;
 	}
+	
+	/**
+	 * prende in ingresso il file csv, permette di leggerlo linea per linea,restituendo un arraylist di righe 
+	 * @param file, nome del file csv
+	 * @return records, arrylist di righe
+	 * @throws FileNotFoundException, eccezione lanciata in caso il file non esista
+	 */
 
+	
 	public static List<List<String>> readFile(String file) throws FileNotFoundException {
 		List<List<String>> records = new ArrayList<>();
 		int i = 0;
@@ -33,6 +48,11 @@ public class ParserCSV {
 		System.out.println("righe : "+i);
 		return records;
 	}
+	/**
+	 * permette di scandire le righe del file csv in valori di tipo ArrayList
+	 * @param line, singola riga del file csv
+	 * @return values, valori  di tipo ArrayList che verranno poi aggiunti nel record @see readFile
+	 */
 	
 	private static List<String> getRecordFromLine(String line) {
 		List<String> values = new ArrayList<String>();
@@ -45,7 +65,11 @@ public class ParserCSV {
 		}
 		return values;
 	}
-	
+	/**
+	 * prende in ingresso un ArrayLIst contenente altri arraylist da @see readFile e permette di creare un ArrayList di tipo Business.
+	 * Il parser avviene effettuando dei controlli sulla stringa in modo tale da ottenere una lista di business consistente.
+	 * @param records
+	 */
 	public static void parserCSV( List<List<String>> records) {
 		ArrayList <Business> business = new ArrayList <Business>();
 		List<String> line;
