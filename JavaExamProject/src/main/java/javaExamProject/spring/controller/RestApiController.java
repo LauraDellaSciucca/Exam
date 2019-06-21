@@ -49,7 +49,8 @@ public class RestApiController {
 	}
 
 	/**
-	 * Restituisce tutte le attivita' che siamo riusciti a recuperare dal file CSV
+	 * Restituisce tutte le attivita' che siamo riusciti a recuperare dal file CSV 
+	 * in base al codice scelto dall'utente
 	 */
 
 
@@ -65,7 +66,7 @@ public class RestApiController {
 	}
 
 	/**
-	 * Restituisce tutte le attivita' con codice scelto dall'utente
+	 * Restituisce tutte le attivita' con codice di municipio scelto dall'utente
 	 */
 
 	@RequestMapping(value = "/business/municipality/{code}", method = RequestMethod.GET)
@@ -142,7 +143,7 @@ public class RestApiController {
 	}
 
 	/**
-	 * Restituisce la somma delle superfici totali delle attivita' con variabile municpio e  valore di municpio scelto dall'utente
+	 * Restituisce la somma delle superfici totali delle attivita' con variabile municipio e  valore di municpio scelto dall'utente
 	 */
 	@RequestMapping(value = "/business/sum/{variable}/value/{value}", method = RequestMethod.GET)
 	public ResponseEntity<?> sumBusiness(@PathVariable("variable")String variable , @PathVariable("value") String value) {
