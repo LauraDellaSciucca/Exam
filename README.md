@@ -30,14 +30,14 @@ Il progetto è strutturato in 5 package:
 
 - **javaExamProject.spring:** al cui interno troviamo la classe `javaExamProjectApp.java` contenente il main che permette l'avvio del programma.
 - **javaExamProject.spring.controller:** caratterizzato dalla classe che rappresenta il componente con il quale interagisce direttamente l'utente. 
-- **javaExamProject.spring.model: ** costituito dalla classe `Business.java` e `Metadata.java` che permette di visualizzare i metadati relativi agli attributi del dataset.
-- **javaExamProject.spring.service: ** costituita da 4 classi
- - `BusinessService.java:` interfaccia
- - `BusinessServiceImplements.java:` classe che implementa l'interfaccia
- - `ParserJSON.java:` in cui si effettua il parser del file JSON con il quale si trova il file in formato CSV e si effettua il relativo downolad
- - `ParserCSV.java:` classe utilizzata per effettuare il parser del file in formato CSV
+- **javaExamProject.spring.model:** costituito dalla classe `Business.java` e `Metadata.java` che permette di visualizzare i metadati relativi agli attributi del dataset.
+- **javaExamProject.spring.service:** costituita da 4 classi
+  - `BusinessService.java:` interfaccia
+  - `BusinessServiceImplements.java:` classe che implementa l'interfaccia
+  - `ParserJSON.java:` in cui si effettua il parser del file JSON con il quale si trova il file in formato CSV e si effettua il relativo downolad
+  - `ParserCSV.java:` classe utilizzata per effettuare il parser del file in formato CSV
 
-- **javaExamProject.spring.util: ** che contiene una classe utilizzata per la gestione degli errori.
+- **javaExamProject.spring.util:** che contiene una classe utilizzata per la gestione degli errori.
 
 ### File
 
@@ -51,7 +51,7 @@ Nell'applicazione sono inoltre presenti diversi file:
 
 Di seguito sono riportati i diagrammi utili per la comprensione del progetto
 
-![Diagramma delle classi](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png)
+![UML](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png)
 
 [Link](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png) del diagramma delle classi
 
@@ -119,13 +119,13 @@ Filtra le attivita' in base all'operatore **not** restituendo tutte le attivita'
 >http://localhost:8080/Spring/api/business/filterNot
 
 Filtra le attivita' in base a due operatori
-- **in: ** restituisce le attivita' con l'attributo e i valore inseriti
-- **nin: ** restituisce tutte le attivita' tranne quelle con attributo e valore inseriti
+- **in:** restituisce le attivita' con l'attributo e i valore inseriti
+- **nin:** restituisce tutte le attivita' tranne quelle con attributo e valore inseriti
 >http://localhost:8080/Spring/api/business/filterN
 
 Filtra le attivita' in base a due operatori
-- **and: ** restituisce le attivita' che presentano tutti gli attributi richiesti con i relativi valori
-- **or: ** restituisce le attivita' con almeno uno dei parametri richiesti
+- **and:** restituisce le attivita' che presentano tutti gli attributi richiesti con i relativi valori
+- **or:** restituisce le attivita' con almeno uno dei parametri richiesti
 >http://localhost:8080/Spring/api/business/lFilter
 
 ###### Scelte utente relative ai filtri
