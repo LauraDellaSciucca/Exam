@@ -51,9 +51,9 @@ Nell'applicazione sono inoltre presenti diversi file:
 
 Di seguito sono riportati i diagrammi utili per la comprensione del progetto
 
-![UML](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png)
+![UML](https://github.com/LauraDellaSciucca/Exam/blob/master/UML.png)
 
-[Link](https://github.com/LauraDellaSciucca/Exam/blob/master/JavaExamProject/UML.png) del diagramma delle classi
+[Link](https://github.com/LauraDellaSciucca/Exam/blob/master/UML.png) del diagramma delle classi
 
 ![Diagramma dei casi d'uso](https://github.com/LauraDellaSciucca/Exam/blob/master/Diagramma%20casi%20d'uso.jpg)
 
